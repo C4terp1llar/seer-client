@@ -44,7 +44,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const isAuthenticated = document.cookie.includes("JSESSIONID") && document.cookie.includes("atlassian.xsrf.token");
+  const isAuthenticated = document.cookie.includes("token")
 
   if (to.path.startsWith('/app')) {
     if (!isAuthenticated) {
@@ -53,8 +53,7 @@ router.beforeEach(async (to, from, next) => {
       const isValid = await checkAuth();
 
       if (!isValid) {
-        document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "atlassian.xsrf.token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         next('/');
       } else {
         next();
@@ -67,8 +66,7 @@ router.beforeEach(async (to, from, next) => {
       if (isValid) {
         next('/app');
       } else {
-        document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "atlassian.xsrf.token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         next();
       }
     } else {

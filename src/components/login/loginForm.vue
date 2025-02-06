@@ -36,9 +36,10 @@ const handleInput = (val: string) => {
           label="Логин"
           v-model.trim="username"
           :rules="[rules.required]"
-          variant="outlined"
+          variant="solo-filled"
           @input="username = handleInput(username)"
           hide-details="auto"
+          density="comfortable"
       />
 
       <v-text-field
@@ -47,24 +48,24 @@ const handleInput = (val: string) => {
           class="mb-2"
           v-model.trim="password"
           :rules="[rules.required]"
-          variant="outlined"
+          variant="solo-filled"
           :append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="isPasswordVisible ? 'text' : 'password'"
           @click:append-inner="isPasswordVisible = !isPasswordVisible"
           @input="password = handleInput(password)"
           hide-details="auto"
+          density="comfortable"
       />
 
       <v-btn
           id="login__enter-btn"
           type="submit"
-          class="align-self-center text-none w-100"
-          variant="outlined"
+          class="align-self-center text-none w-100 btn__base mt-5"
+          variant="tonal"
           :loading="pending"
           :disabled="pending"
-          color="primary"
       >
-        Войти
+        Вход
       </v-btn>
 
     </v-form>

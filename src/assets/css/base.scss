@@ -10,3 +10,11 @@
   height: 100%;
   @include flexbox(flex, center, center, unset);
 }
+
+.btn__base{
+  background-color: #FF3030 !important;
+  transition: .3s;
+  &:hover{
+    filter: drop-shadow(0px 0px 5px rgba(255, 48, 48, 0.85));
+  }
+}

@@ -1,7 +1,19 @@
 <script setup lang="ts">
-
 import SideBar from "@/components/sideBar.vue";
 import HeadBar from "@/components/headBar.vue";
+import {useUserStore} from "@/stores/user.ts";
+import {onMounted, ref} from "vue";
+import GifLoader from "@/components/loaders/gifLoader.vue";
+
+const userStore = useUserStore();
+
+const pending = ref<boolean>(false);
+
+onMounted(async () => {
+  pending.value = true;
+  await userStore.getUser();
+  pending.value = false;
+})
 </script>
 
 <template>
@@ -13,7 +25,8 @@ import HeadBar from "@/components/headBar.vue";
       <head-bar/>
     </header>
     <main class="main">
-      <router-view/>
+      <gif-loader v-if="pending"/>
+      <router-view v-else-if="!pending && userStore.userData"/>
     </main>
   </div>
 </template>
