@@ -3,7 +3,7 @@ import { ref } from 'vue';
 
 const loadThemeFromLocalStorage = (): 'light' | 'dark' => {
     const savedTheme = localStorage.getItem('appTheme');
-    return savedTheme ? (savedTheme as 'light' | 'dark') : 'light';
+    return savedTheme ? (savedTheme as 'light' | 'dark') : 'dark';
 };
 
 const saveThemeToLocalStorage = (theme: 'light' | 'dark') => {

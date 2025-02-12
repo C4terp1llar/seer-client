@@ -18,3 +18,20 @@
     filter: drop-shadow(0px 0px 5px rgba(255, 48, 48, 0.85));
   }
 }
+
+.v3-emoji-picker{
+  width: 100% !important;
+  min-width: 100px !important;
+  --v3-picker-bg: rgb(var(--v-theme-background)) !important;
+  --v3-picker-fg: currentColor !important;
+  filter: drop-shadow(0 0 3px currentColor) !important;
+
+  .v3-footer{
+    display: none !important;
+  }
+}
+.v-theme--dark {
+  .v3-emoji-picker{
+    --v3-group-image-filter: invert(1) !important;
+  }
+}

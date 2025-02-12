@@ -9,18 +9,18 @@ export const useSettingsStore = defineStore('settings', () => {
     const ntfStore = useNotificationStore()
     const uStore = useUserStore()
 
-    const getProjects = async () : Promise<string[] | null> => {
+    const getProjects = async () : Promise<string[] | void> => {
         try {
             const response = await authAPI.get('/project')
 
             if (response.data && response.status === 200) {
                 return response.data.projects
             }
-            return null
+
         } catch (err: any) {
             ntfStore.addNotification('error', 'Произошла ошибка при получении проектов, попробуйте позже', 3000)
             console.error('Ошибка при получении проектов:', err);
-            return null
+
         }
     };
 

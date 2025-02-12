@@ -6,7 +6,7 @@ const themeStore = useAppThemeStore()
 </script>
 
 <template>
-  <v-app :theme="themeStore.currentTheme">
+  <v-app theme="dark">
     <router-view/>
     <notifications/>
   </v-app>
