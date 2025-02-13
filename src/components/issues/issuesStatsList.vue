@@ -36,10 +36,14 @@ onMounted(async () => {
   width: 100%;
   .issues-stats-list__content{
     display: flex;
+    justify-content: center;
+
+
     gap: 10px;
     padding: 10px;
     border-radius: 15px;
     background: #282828;
+
   }
 }
 </style>

@@ -5,6 +5,7 @@ import QueriesItem from "@/components/queries/queriesItem.vue";
 import PaginationLoader from "@/components/loaders/paginationLoader.vue";
 import {onMounted, ref} from "vue";
 import GifLoader from "@/components/loaders/gifLoader.vue";
+import QueiesListItemSkeleton from "@/components/loaders/queiesListItemSkeleton.vue";
 
 const queryStore = useQueriesStore()
 
@@ -22,7 +23,7 @@ onMounted(async () => {
 
 <template>
   <div class="queries-list__wrapper">
-    <gif-loader v-if="queryStore.loadPending"/>
+    <queies-list-item-skeleton v-if="queryStore.loadPending" v-for="i in 3" :key="i"/>
 
     <div class="queries-list__content" v-if="!queryStore.loadPending && queryStore.queries && queryStore.queries.length">
       <queries-item v-for="q in queryStore.queries" :key="q._id" :q="q"/>
@@ -46,11 +47,13 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .queries-list__wrapper {
-  flex-direction: column;
-  display: flex;
-  gap: 10px;
   padding: 10px;
   border-radius: 15px;
   background: #282828;
+  .queries-list__content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>

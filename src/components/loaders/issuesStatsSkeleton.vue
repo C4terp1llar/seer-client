@@ -25,7 +25,7 @@ import SkeletonLoader from "@/components/loaders/skeletonLoader.vue";
     border-radius: 10px;
     position: relative;
     width: 100%;
-    height: 130px;
+    height: 165px;
     overflow: hidden;
     z-index: 10;
   }

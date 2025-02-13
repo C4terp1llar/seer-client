@@ -29,8 +29,11 @@ export interface IssuesShortStats {
 
 export interface JqlQuery {
     _id: string;
+    user: string;
     name: string;
     query: string;
     result: any;
+    fields: string[];
     createdAt: Date;
+    updatedAt: Date;
 }

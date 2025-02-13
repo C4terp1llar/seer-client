@@ -19,6 +19,7 @@
   }
 }
 
+// стилизация емоджи пикера
 .v3-emoji-picker{
   width: 100% !important;
   min-width: 100px !important;
@@ -34,4 +35,25 @@
   .v3-emoji-picker{
     --v3-group-image-filter: invert(1) !important;
   }
+}
+
+//стилизация код едитора
+.vjs-tree-node:hover {
+  background-color: dimgrey !important;
+}
+
+//стили базовый скролл
+.styled-scroll__np::-webkit-scrollbar {
+  width: 8px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+.styled-scroll__np::-webkit-scrollbar-thumb {
+  background-color: #c4c4c4;
+  border-radius: 5px;
+}
+.styled-scroll__np::-webkit-scrollbar-track {
+  background: #777777;
+  margin: 3px;
+  border-radius: 5px;
 }

@@ -23,12 +23,12 @@ const isActive = (path: string) => computed(() => route.path.includes(`/app/${pa
 
       <li :class="['dashboard', { active: isActive('dashboard').value }]">
         <RouterLink to="/app/dashboard"/>
-        <v-icon :size="30">mdi-view-dashboard</v-icon>
+        <img src="../assets/img/dashboard.svg" alt="dashboard">
       </li>
 
       <li :class="['settings', { active: isActive('settings').value }]">
         <RouterLink to="/app/settings"/>
-        <v-icon :size="30">mdi-cog</v-icon>
+        <img src="../assets/img/settings.svg"  alt="settings">
       </li>
 
       <li class="logout mt-auto">
@@ -42,7 +42,14 @@ const isActive = (path: string) => computed(() => route.path.includes(`/app/${pa
 </template>
 
 <style scoped lang="scss">
-
+li{
+  height: 75px;
+}
+img{
+  height: 30px;
+  width: 30px;
+  object-fit: contain;
+}
 .logo{
   padding: 10px;
   display: flex;
@@ -80,17 +87,17 @@ const isActive = (path: string) => computed(() => route.path.includes(`/app/${pa
 }
 
 .dashboard, .logout{
-  border-top: 1px solid dimgray;
+  border-top: 1px solid #4B4B4B;
 }
 .dashboard, .settings{
-  border-bottom: 1px solid dimgray;
+  border-bottom: 1px solid #4B4B4B;
 }
 
 .logout,
 .dashboard,
 .settings{
   @media (max-width: 650px) {
-    border: 1px solid dimgray;
+    border: 1px solid #4B4B4B;
     border-radius: 5px;
   }
 }
@@ -108,7 +115,7 @@ const isActive = (path: string) => computed(() => route.path.includes(`/app/${pa
   top: 0;
   height: 100vh;
   justify-content: center;
-  border-right: 1px solid dimgray;
+  border-right: 1px solid #4B4B4B;
 
   @media (max-width: 650px) {
     height: auto;
@@ -120,7 +127,7 @@ const isActive = (path: string) => computed(() => route.path.includes(`/app/${pa
     top: unset;
     z-index: 10001;
     background: rgb(var(--v-theme-background));
-    border-top: 1px solid dimgray;
+    border-top: 1px solid #4B4B4B;
   }
 }
 
@@ -146,7 +153,7 @@ const isActive = (path: string) => computed(() => route.path.includes(`/app/${pa
     justify-content: center;
     gap: 10px;
     transition: background-color 0.3s;
-    outline-color: dimgray;
+    outline-color: #4B4B4B;
 
     @media (max-width: 650px) {
       padding: 5px 10px;
@@ -157,7 +164,7 @@ const isActive = (path: string) => computed(() => route.path.includes(`/app/${pa
     }
 
     &.active {
-      background-color: #7777;
+      background: linear-gradient(301deg, rgba(234,120,102,1) 0%, rgba(255,0,63,1) 40%, rgba(252,96,62,1) 60%, rgba(248,135,108,1) 100%);
     }
 
     a {

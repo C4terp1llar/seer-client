@@ -49,9 +49,10 @@ export const useQueriesStore = defineStore('queries', () => {
 
     const createPending = ref<boolean>(false);
 
-    const createJqlQuery = async (name: string, query: string) => {
+    const createJqlQuery = async (name: string, query: string, fields?: string[]) => {
         try {
-            const response = await authAPI.post('/query', { name, query });
+            createPending.value = true;
+            const response = await authAPI.post('/query', { name, query, fields });
 
             if (response.status === 201 && response.data.query) {
                 queries.value?.unshift(response.data.query);
@@ -60,6 +61,8 @@ export const useQueriesStore = defineStore('queries', () => {
         } catch (err: any) {
             ntfStore.addNotification('error', 'Произошла ошибка при создании запроса, попробуйте позже', 3000);
             console.error('Ошибка при создании запроса');
+        }finally{
+            createPending.value = false;
         }
     };
 
@@ -78,17 +81,32 @@ export const useQueriesStore = defineStore('queries', () => {
     };
 
     const checkJqlQueryFlag = ref<boolean>(false)
+    const checkJqlQueryData = ref<any>(null); // тк нельзя знать точно узнать стр-ру ответа - то просто any
 
-    const checkJqlQuery = async (jqlQuery: string) => {
+    const checkJqlQuery = async (jqlQuery: string, fields?: string[]) => {
         try {
-            const response = await authAPI.post('/query/check', { jqlQuery });
+            const response = await authAPI.post('/query/check', { jqlQuery, fields });
 
             checkJqlQueryFlag.value = response.status === 200;
+
+            if (response.data){
+                checkJqlQueryData.value = response.data.data
+            }
         } catch (err: any) {
-            ntfStore.addNotification('error', 'Произошла ошибка при проверке запроса, попробуйте позже', 3000);
+            if (err.response.data){
+                checkJqlQueryData.value = err.response.data.data
+            }
+            if (err.response.status !== 400){
+                ntfStore.addNotification('error', 'Произошла ошибка при проверке запроса, попробуйте позже', 3000);
+            }
             console.error('Ошибка при проверке запроса', err);
         }
     };
+
+    const clearQueryEditorData = () => {
+        checkJqlQueryFlag.value = false;
+        checkJqlQueryData.value = null;
+    }
 
     const getJqlQueryById = async (queryId: string) => {
         try {
@@ -116,6 +134,8 @@ export const useQueriesStore = defineStore('queries', () => {
         deleteJqlQuery,
         getJqlQueryById,
         checkJqlQueryFlag,
+        checkJqlQueryData,
+        clearQueryEditorData,
         checkJqlQuery
     }
 
