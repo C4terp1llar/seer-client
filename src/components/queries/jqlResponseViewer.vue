@@ -7,6 +7,7 @@ interface Props {
   data: any;
   status: "error" | "success";
   title?: string;
+  shortMode?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -17,9 +18,9 @@ const textColor = computed(() => (props.status === "error" ? "#ff6b6b" : "#a0e36
 </script>
 
 <template>
-  <div class="json-container styled-scroll__np">
+  <div :class="['json-container styled-scroll__np', {'__short': shortMode}]">
     <h3 v-if="title" class="json-title" :style="{ color: textColor }">{{ title }}</h3>
-    <json-viewer :data="jsonData" :deep="2" showLineNumber showLine showLength class="json-view" :style="{ color: textColor }" />
+    <json-viewer :data="jsonData" :deep="shortMode ? 1 : 2" showLineNumber showLine showLength class="json-view" :style="{ color: textColor }" />
   </div>
 </template>
 
@@ -33,6 +34,9 @@ const textColor = computed(() => (props.status === "error" ? "#ff6b6b" : "#a0e36
   overflow: auto;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   max-height: 400px;
+
+  &.__short{
+  }
 }
 
 .json-title {

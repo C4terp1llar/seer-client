@@ -87,6 +87,7 @@ const createQuery = async () => {
       />
 
       <div class="jql-text__fields">
+        <span class="jql-text__fields__info">Поле Fields предназначено для вывода сложных структур данных.</span>
         <v-textarea
             label="Fields (Необязательно)"
             placeholder="Наименования полей через пробел"
@@ -139,7 +140,6 @@ const createQuery = async () => {
 <style scoped lang="scss">
 .create-query-editor {
   width: 700px;
-  box-shadow: 0 0 5px currentColor;
   background: rgb(var(--v-theme-background));
   position: relative;
   border-radius: 10px;
@@ -184,5 +184,10 @@ const createQuery = async () => {
       gap: 10px;
     }
   }
+}
+.jql-text__fields__info{
+  font-size: 12px;
+  opacity: .8;
+  margin-left: 5px;
 }
 </style>

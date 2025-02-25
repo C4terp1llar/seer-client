@@ -13,6 +13,6 @@ import QueriesHead from "@/components/queries/queriesHead.vue";
 
 <style scoped lang="scss">
 .queries__wrapper{
-  width: 100%;
+
 }
 </style>

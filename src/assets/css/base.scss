@@ -57,3 +57,37 @@
   margin: 3px;
   border-radius: 5px;
 }
+
+//стили минималистичный скролл 
+.minimalistic_scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.minimalistic_scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.4);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.minimalistic_scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+//стили минималистичный скролл __ красный
+.minimalistic_scroll__red::-webkit-scrollbar {
+  width: 6px;
+}
+
+.minimalistic_scroll__red::-webkit-scrollbar-thumb {
+  background-color: #FF3030;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.minimalistic_scroll__red::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 5px;
+  margin: 10px 0;
+}

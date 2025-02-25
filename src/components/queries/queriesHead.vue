@@ -15,6 +15,6 @@ import CreateQueryWrap from "@/components/queries/createQueryWrap.vue";
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5px 5px 5px;
+  padding: 0 5px;
 }
 </style>

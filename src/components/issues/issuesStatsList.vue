@@ -4,6 +4,7 @@ import {useMainStore} from "@/stores/main.ts";
 import IssuesStatsSkeleton from "@/components/loaders/issuesStatsSkeleton.vue";
 import IssuesStatsItem from "@/components/issues/issuesStatsItem.vue";
 import type {IssuesShortStats} from "@/types";
+import {vAutoAnimate} from '@formkit/auto-animate'
 
 interface Props {
   project: string
@@ -20,7 +21,7 @@ onMounted(async () => {
 <template>
   <div class="issues-stats-list__wrapper">
     <issues-stats-skeleton class="w-100" v-if="mainStore.pendingIssuesStats"/>
-    <div class="issues-stats-list__content" v-else-if="!mainStore.pendingIssuesStats && mainStore.issuesStats">
+    <div class="issues-stats-list__content" v-else-if="!mainStore.pendingIssuesStats && mainStore.issuesStats" v-auto-animate>
       <issues-stats-item
           v-for="([key, value]) in Object.entries(mainStore.issuesStats)"
           :key="key"

@@ -4,8 +4,10 @@ import ProjectNotSelect from "@/components/dashboard/projectNotSelect.vue";
 import IssuesStatsList from "@/components/issues/issuesStatsList.vue";
 import QueriesWrap from "@/components/queries/queriesWrap.vue";
 import CreateQueryModal from "@/components/queries/createQueryModal.vue";
-import {computed} from "vue";
+import {computed, ref, watch} from "vue";
 import {useRoute} from "vue-router";
+import QueriesHead from "@/components/queries/queriesHead.vue";
+import QueriesList from "@/components/queries/queriesList.vue";
 
 const userStore = useUserStore();
 
@@ -20,7 +22,8 @@ const isViewQueryVisible = computed(() => !route.query.queryEditor && route.quer
     <project-not-select v-if="!userStore.userData.selectedProject"/>
     <div class="dashboard-page__content" v-else>
       <issues-stats-list :project="userStore.userData.selectedProject"/>
-      <queries-wrap/>
+      <queries-head/>
+      <queries-list/>
     </div>
   </div>
 
@@ -34,9 +37,10 @@ const isViewQueryVisible = computed(() => !route.query.queryEditor && route.quer
   padding: 10px;
   .dashboard-page__content{
     width: 100%;
+    height: 100%;
+    gap: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
   }
 }
 </style>

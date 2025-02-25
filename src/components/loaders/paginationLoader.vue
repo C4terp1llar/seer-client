@@ -21,7 +21,7 @@
 .dot {
   width: 15px;
   height: 15px;
-  background-color: green;
+  background-color: #FF3030;
   border-radius: 50%;
   margin: 0 5px;
   opacity: 0.5;
@@ -32,12 +32,12 @@
   0%, 100% {
     opacity: 0.5;
     transform: scale(1);
-    background-color: green;
+    background-color: #FF3030;
   }
   10% {
     opacity: 1;
     transform: scale(1.2);
-    background-color: #4CAF50;
+    background-color: darkred;
   }
 }
 

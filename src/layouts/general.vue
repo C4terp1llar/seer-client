@@ -38,8 +38,6 @@ onMounted(async () => {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
-  //background: linear-gradient();
-  //background: rgb(var(--v-theme-background));
   background: linear-gradient(210deg, rgba(0,0,0,1) 77%, rgba(72,4,4,1) 115%);
 
   .aside{
@@ -56,8 +54,10 @@ onMounted(async () => {
   .main{
     grid-row: span 1;
     grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    max-height: inherit;
+    overflow: auto;
   }
-
-
 }
 </style>

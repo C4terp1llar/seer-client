@@ -17,7 +17,7 @@ export const useQueriesStore = defineStore('queries', () => {
 
     const getQueries = async (page: number, limit: number, withoutPending?: boolean) => {
 
-        let currentPending = page < 2 ? loadPending : loaMorePending;
+        let currentPending = page === 1 ? loadPending : loaMorePending;
 
         hasMoreQueries.value = null;
 
@@ -31,7 +31,7 @@ export const useQueriesStore = defineStore('queries', () => {
             if (response.status === 200 && response.data) {
                 hasMoreQueries.value = response.data.hasMore;
 
-                if (page < 2) {
+                if (page === 1) {
                     queries.value = response.data.queries;
                 } else if (page >= 2 && queries.value){
                     queries.value.push(...response.data.queries);
