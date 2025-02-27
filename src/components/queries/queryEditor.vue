@@ -72,9 +72,9 @@ const createQuery = async () => {
       <v-icon :size="24">mdi-close</v-icon>
     </button>
 
-    <h4 class="text-center mb-2">Конструктор</h4>
+    <h4 class="text-center mb-2">{{ q ? q.name : 'Конструктор' }}</h4>
 
-    <create-query-name :title="title" @update-text="val => title = val"/>
+    <create-query-name v-if="mode === 'create'" :title="title" @update-text="val => title = val"/>
 
     <div class="jql-text">
       <v-textarea
@@ -88,8 +88,8 @@ const createQuery = async () => {
           :disabled="mode === 'view'"
       />
 
-      <div class="jql-text__fields">
-        <span class="jql-text__fields__info">Поле Fields предназначено для вывода сложных структур данных.</span>
+      <div class="jql-text__fields" v-if="mode === 'create' || (q && q.fields.length)">
+        <span v-if="mode === 'create'" class="jql-text__fields__info">Поле Fields предназначено для вывода сложных структур данных.</span>
         <v-textarea
             label="Fields (Необязательно)"
             placeholder="Наименования полей через пробел"
@@ -111,13 +111,13 @@ const createQuery = async () => {
 
 
     <v-scroll-y-transition>
-      <div class="jql-text__response" v-if="queriesStore.checkJqlQueryData">
-        <jql-response-viewer :data="queriesStore.checkJqlQueryData"
-                             :status="queriesStore.checkJqlQueryFlag ? 'success' : 'error'"/>
+      <div class="jql-text__response" v-if="q || queriesStore.checkJqlQueryData">
+        <jql-response-viewer :data="q?.result || queriesStore.checkJqlQueryData"
+                             :status="mode === 'create' ? (queriesStore.checkJqlQueryFlag ? 'success' : 'error') : 'success'"/>
       </div>
     </v-scroll-y-transition>
 
-    <div class="create-query-editor__controls">
+    <div :class="`create-query-editor__controls ${mode}`">
       <div class="__control-check" v-if="mode === 'create'">
         <v-btn @click="checkQuery" :disabled="checkPending" :loading="checkPending" class="text-none" variant="outlined">
           Проверить
@@ -131,8 +131,8 @@ const createQuery = async () => {
       </div>
 
       <div class="__controls-submit">
-        <v-btn class="text-none" variant="outlined" @click="handleClear">Сброс</v-btn>
-        <v-btn class="text-none btn__base" variant="tonal" @click="createQuery">Готово</v-btn>
+        <v-btn class="text-none" variant="outlined" @click="handleClear" v-if="mode === 'create'">Сброс</v-btn>
+        <v-btn class="text-none btn__base" variant="tonal" @click="mode === 'create' ? createQuery() : handleClose()">Готово</v-btn>
       </div>
     </div>
 
@@ -176,6 +176,10 @@ const createQuery = async () => {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
+
+    &.view{
+      justify-content: center;
+    }
 
     .__control-check{
       display: flex;
