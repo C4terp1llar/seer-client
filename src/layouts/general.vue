@@ -2,8 +2,10 @@
 import SideBar from "@/components/sideBar.vue";
 import HeadBar from "@/components/headBar.vue";
 import {useUserStore} from "@/stores/user.ts";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import GifLoader from "@/components/loaders/gifLoader.vue";
+import QueryModal from "@/components/queries/queryModal.vue";
+import {useRoute} from "vue-router";
 
 const userStore = useUserStore();
 
@@ -14,6 +16,9 @@ onMounted(async () => {
   await userStore.getUser();
   pending.value = false;
 })
+
+const route = useRoute();
+const isQueryModalVisible = computed(() => route.query.queryEditor || route.query.queryView);
 </script>
 
 <template>
@@ -29,6 +34,8 @@ onMounted(async () => {
       <router-view v-else-if="!pending && userStore.userData"/>
     </main>
   </div>
+
+  <query-modal v-if="isQueryModalVisible"/>
 </template>
 
 <style scoped lang="scss">

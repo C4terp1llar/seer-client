@@ -5,9 +5,11 @@ import {onClickOutside} from "@vueuse/core";
 import CreateQueryName from "@/components/queries/createQueryName.vue";
 import {useQueriesStore} from "@/stores/queries.ts";
 import JqlResponseViewer from "@/components/queries/jqlResponseViewer.vue";
+import type {JqlQuery} from "@/types";
 
 interface Props {
-  mode: 'create' | 'view'
+  mode: 'create' | 'view',
+  q?: JqlQuery | null
 }
 
 const props = defineProps<Props>();
@@ -18,7 +20,6 @@ const editorRef = ref<HTMLElement | null>(null);
 const router = useRouter()
 
 onClickOutside(editorRef, e => handleClose())
-
 const handleClose = () => {
   if (props.mode === 'create') {
     router.push({query: {queryEditor: undefined}});
@@ -36,9 +37,9 @@ const handleClear = () => {
 
 onUnmounted(() => queriesStore.clearQueryEditorData());
 
-const title = ref<string>('');
-const jql = ref<string>('');
-const fields = ref<string>('');
+const title = ref<string>(props.q?.name || '');
+const jql = ref<string>(props.q?.query || '');
+const fields = ref<string>(props.q?.fields ? props.q?.fields.join(', ') : '');
 
 const formattedFields = computed(() => {
   if (fields.value) {
@@ -84,6 +85,7 @@ const createQuery = async () => {
           v-model="jql"
           hide-details="auto"
           no-resize
+          :disabled="mode === 'view'"
       />
 
       <div class="jql-text__fields">
@@ -97,6 +99,7 @@ const createQuery = async () => {
             hide-details="auto"
             no-resize
             clearable
+            :disabled="mode === 'view'"
         />
         <v-fade-transition>
           <div class="formatted-fields" v-if="formattedFields">
@@ -115,7 +118,7 @@ const createQuery = async () => {
     </v-scroll-y-transition>
 
     <div class="create-query-editor__controls">
-      <div class="__control-check">
+      <div class="__control-check" v-if="mode === 'create'">
         <v-btn @click="checkQuery" :disabled="checkPending" :loading="checkPending" class="text-none" variant="outlined">
           Проверить
         </v-btn>

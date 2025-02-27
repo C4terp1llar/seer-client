@@ -4,6 +4,7 @@ import { formatShortDate } from "../../helpers/dateFormat.ts";
 import {computed, ref} from "vue";
 import JqlResponseViewer from "@/components/queries/jqlResponseViewer.vue";
 import {useQueriesStore} from "@/stores/queries.ts";
+import {useRouter} from "vue-router";
 
 const emit = defineEmits<{
   (e: 'reload'): void
@@ -28,6 +29,8 @@ const deleteQuery = async () => {
   delPending.value = false;
   emit('reload')
 }
+
+const router = useRouter();
 </script>
 
 <template>
@@ -43,7 +46,7 @@ const deleteQuery = async () => {
       <jql-response-viewer v-else :data="q.result" status="success" short-mode/>
     </div>
     <div class="queries-item__time">
-      <v-btn icon variant="text" density="compact"><v-icon>mdi-open-in-new</v-icon></v-btn>
+      <v-btn icon variant="text" density="compact" @click="router.push({query: {queryView: q._id}})"><v-icon>mdi-open-in-new</v-icon></v-btn>
       <span class="queries-item__date-text">Создано {{ formatShortDate(q.createdAt) }}</span>
     </div>
   </div>

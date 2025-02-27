@@ -116,7 +116,9 @@ export const useQueriesStore = defineStore('queries', () => {
                 return response.data.query;
             }
         } catch (err: any) {
-            ntfStore.addNotification('error', 'Произошла ошибка при получении запроса, попробуйте позже', 3000);
+            if (err.response.status !== 400){
+                ntfStore.addNotification('error', 'Произошла ошибка при получении запроса, попробуйте позже', 3000);
+            }
             console.error('Ошибка при получении запроса', err);
         }
     };

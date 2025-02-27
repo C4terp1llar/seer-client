@@ -2,18 +2,10 @@
 import {useUserStore} from "@/stores/user.ts";
 import ProjectNotSelect from "@/components/dashboard/projectNotSelect.vue";
 import IssuesStatsList from "@/components/issues/issuesStatsList.vue";
-import QueriesWrap from "@/components/queries/queriesWrap.vue";
-import CreateQueryModal from "@/components/queries/createQueryModal.vue";
-import {computed, ref, watch} from "vue";
-import {useRoute} from "vue-router";
 import QueriesHead from "@/components/queries/queriesHead.vue";
 import QueriesList from "@/components/queries/queriesList.vue";
 
 const userStore = useUserStore();
-
-const route = useRoute();
-const isCreateQueryVisible = computed(() => route.query.queryEditor && !route.query.queryView);
-const isViewQueryVisible = computed(() => !route.query.queryEditor && route.query.queryView);
 
 </script>
 
@@ -26,8 +18,6 @@ const isViewQueryVisible = computed(() => !route.query.queryEditor && route.quer
       <queries-list/>
     </div>
   </div>
-
-  <create-query-modal v-if="isCreateQueryVisible"/>
 </template>
 
 <style scoped lang="scss">
