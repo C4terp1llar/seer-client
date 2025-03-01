@@ -42,6 +42,7 @@ const isActive = (path: string) => computed(() => route.path.includes(`/app/${pa
 </template>
 
 <style scoped lang="scss">
+
 li{
   height: 75px;
 }

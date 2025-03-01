@@ -37,3 +37,14 @@ export interface JqlQuery {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export type DashboardTab = 'queries' | 'widgets';
+
+export interface WidgetNote {
+    _id: string;
+    user: string;
+    title: string;
+    content: string;
+    createdAt: Date;
+    updatedAt: Date;
+}

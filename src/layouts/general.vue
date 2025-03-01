@@ -50,21 +50,21 @@ const isQueryModalVisible = computed(() => route.query.queryEditor || route.quer
   .aside{
     grid-row: span 2;
     grid-column: span 1;
+    z-index: 10;
   }
   .header{
     grid-row: span 1;
     grid-column: span 1;
+    background: rgb(var(--v-theme-background));
+    z-index: 10;
     position: sticky;
     top: 0;
-    background: rgb(var(--v-theme-background));
   }
   .main{
     grid-row: span 1;
     grid-column: span 1;
     display: flex;
     flex-direction: column;
-    max-height: inherit;
-    overflow: auto;
   }
 }
 </style>

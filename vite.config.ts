@@ -8,7 +8,8 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   plugins: [
     vue(),
-    vueDevTools(),
+    // закоментировал девтулз, с ним табы не видно
+    // vueDevTools(),
   ],
   resolve: {
     alias: {

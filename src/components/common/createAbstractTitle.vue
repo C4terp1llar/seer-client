@@ -78,9 +78,11 @@ const handleInput = () => {
     border: 1px solid rgba(105, 105, 105, 0.42);
     transition: .3s;
     margin-bottom: auto;
+    background: #282828;
 
     &:hover{
       filter: drop-shadow(0 0 2px currentColor);
+      background: #434343;
     }
   }
   .emoji-picker__wrapper{

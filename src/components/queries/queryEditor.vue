@@ -2,7 +2,7 @@
 import {useRouter} from "vue-router";
 import {computed, onUnmounted, ref} from "vue";
 import {onClickOutside} from "@vueuse/core";
-import CreateQueryName from "@/components/queries/createQueryName.vue";
+import CreateAbstractTitle from "@/components/common/createAbstractTitle.vue";
 import {useQueriesStore} from "@/stores/queries.ts";
 import JqlResponseViewer from "@/components/queries/jqlResponseViewer.vue";
 import type {JqlQuery} from "@/types";
@@ -74,7 +74,7 @@ const createQuery = async () => {
 
     <h4 class="text-center mb-2">{{ q ? q.name : 'Конструктор' }}</h4>
 
-    <create-query-name v-if="mode === 'create'" :title="title" @update-text="val => title = val"/>
+    <create-abstract-title v-if="mode === 'create'" :title="title" @update-text="val => title = val"/>
 
     <div class="jql-text">
       <v-textarea

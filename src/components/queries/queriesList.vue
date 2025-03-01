@@ -55,10 +55,10 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .queries-list__wrapper {
-  padding: 10px;
+  //padding: 10px;
+  //background: #282828;
   border-radius: 15px;
-  background: #282828;
-  overflow: auto;
+  overflow-y: auto;
   .queries-list__content {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
