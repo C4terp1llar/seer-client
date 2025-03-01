@@ -26,11 +26,11 @@ const handleClosePicker = () => {
 
 const handleSelect = (emoji: EmojiExt) => {
   text.value += emoji.i
-  emit('updateText', text.value);
+  emit('updateText', text.value.trim());
 };
 
 const handleInput = () => {
-  emit('updateText', replaceSpaces(text.value));
+  emit('updateText', text.value.trim());
 };
 </script>
 
@@ -39,7 +39,7 @@ const handleInput = () => {
 
     <v-text-field
         label="Наименование"
-        v-model="text"
+        v-model.trim="text"
         variant="solo-filled"
         @input="handleInput"
         hide-details="auto"
