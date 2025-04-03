@@ -33,7 +33,7 @@ onMounted(async () => {
   max-width: 600px;
 
   border-radius: 10px;
-  background: #434343;
+  background: #282828;
   display: flex;
   flex-direction: column;
 }

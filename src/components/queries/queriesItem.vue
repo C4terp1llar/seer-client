@@ -54,7 +54,7 @@ const router = useRouter();
 
 <style scoped lang="scss">
 .queries-item__wrapper {
-  padding: 5px;
+  padding: 5px 5px 0 5px;
   border-radius: 10px;
   gap: 5px;
   background: #434343;
@@ -104,7 +104,9 @@ const router = useRouter();
     position: sticky;
     background: #434343;
     bottom: 0;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding-bottom: 5px;
   }
 }
 

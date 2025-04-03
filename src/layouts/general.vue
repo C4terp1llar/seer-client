@@ -6,6 +6,7 @@ import {computed, onMounted, ref} from "vue";
 import GifLoader from "@/components/loaders/gifLoader.vue";
 import QueryModal from "@/components/queries/queryModal.vue";
 import {useRoute} from "vue-router";
+import EventEditor from "@/components/widgets/eventEditor.vue";
 
 const userStore = useUserStore();
 
@@ -18,7 +19,8 @@ onMounted(async () => {
 })
 
 const route = useRoute();
-const isQueryModalVisible = computed(() => route.query.queryEditor || route.query.queryView);
+const isQueryModalVisible = computed(() => (route.query.queryEditor || route.query.queryView));
+const isEventEditorVisible = computed(() => (route.query.eventEditor || route.query.eventView));
 </script>
 
 <template>

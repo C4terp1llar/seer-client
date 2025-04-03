@@ -129,3 +129,20 @@
     opacity: 1;
   }
 }
+
+// классы
+.calendar__date-time{
+  font-size: 16px;
+  color: #747474;
+  font-weight: 600;
+  &.__mth{
+    font-size: 14px;
+  }
+}
+
+.text__wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+}

@@ -48,3 +48,16 @@ export interface WidgetNote {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface Event {
+    _id: string;
+    user: string;
+    title: string;
+    day: Date,
+    time_from: string,
+    time_to: string,
+    description: string,
+    color: string,
+    createdAt: Date;
+    updatedAt: Date;
+}
