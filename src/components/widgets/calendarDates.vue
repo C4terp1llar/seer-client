@@ -5,7 +5,7 @@ import { ru } from "date-fns/locale";
 import {useCalendarStore} from "@/stores/calendar.ts";
 
 const emit = defineEmits<{
-  (e: 'daySelect', date: Date)
+  (e: 'daySelect', date: Date):void
 }>();
 
 const props = defineProps<{
@@ -168,5 +168,20 @@ const selectDate = (date: Date) => {
 }
 .selected {
   border: 2px solid darkred !important;
+}
+
+.calendar-day__wrap:nth-child(7n + 1) {
+  border-top-left-radius: 19px;
+  border-bottom-left-radius: 19px;
+  padding: 0 3px 0 0;
+  left: 3px;
+  position: relative;
+}
+
+.calendar-day__wrap:nth-child(7n) {
+  border-top-right-radius: 19px;
+  border-bottom-right-radius: 19px;
+  padding: 0 0 0 3px;
+  width: fit-content;
 }
 </style>
