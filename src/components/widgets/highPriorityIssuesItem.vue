@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type {HPIssue} from "@/types";
 import {getPriorityName} from "@/helpers/issuePriorityMap.ts";
+import ScrollContainer from "@/components/common/scrollContainer.vue";
 
 const props = defineProps<{
   issue: HPIssue
@@ -19,20 +20,23 @@ const props = defineProps<{
       <span>{{issue.fields?.description}}</span>
     </div>
     <div class="__chips">
-      <div class="__chip __type-status">
-        <span>{{issue.fields?.issuetype?.name}}</span>
-        <v-icon :size="16" color="grey">mdi-chevron-double-right</v-icon>
-        <span>{{issue.fields?.status?.name}}</span>
-      </div>
-      <div class="__chip __assignee">
-        <v-icon :size="16" color="grey">mdi-account-hard-hat-outline</v-icon>
-        <span>{{issue.fields?.assignee?.displayName}}</span>
-      </div>
-      <div class="__chip __linked">
-        <span>В Jira</span>
-        <v-icon :size="16" color="grey">mdi-open-in-new</v-icon>
-        <a :href="`${issue.baseURL}/browse/${issue.key}`" target="_blank"></a>
-      </div>
+      <scroll-container mode="phShort">
+        <div class="__chip __type-status">
+          <span>{{issue.fields?.issuetype?.name}}</span>
+          <v-icon :size="16" color="grey">mdi-chevron-double-right</v-icon>
+          <span>{{issue.fields?.status?.name}}</span>
+        </div>
+        <div class="__chip __assignee" v-if="issue.fields?.assignee">
+          <v-icon :size="16" color="grey">mdi-account-hard-hat-outline</v-icon>
+          <span>{{`${issue.fields?.assignee?.displayName.split(" ")[0]} ${issue.fields?.assignee?.displayName.split(" ")[1][0]}. ${issue.fields?.assignee?.displayName.split(" ")[2][0]}.`}}</span>
+        </div>
+        <div class="__chip __linked">
+          <span>В Jira</span>
+          <v-icon :size="16" color="grey">mdi-open-in-new</v-icon>
+          <a :href="`${issue.baseURL}/browse/${issue.key}`" target="_blank"></a>
+        </div>
+      </scroll-container>
+
     </div>
   </div>
 </template>
