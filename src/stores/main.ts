@@ -31,11 +31,24 @@ export const useMainStore = defineStore('main', () => {
         }
     };
 
+    const getHPIssue = async (project: string, index: number)  => {
+        try {
+            const response = await authAPI.get('/HPIssues/index', {params: {project, index}})
+
+            if (response.data && response.status === 200) {
+                return response.data
+            }
+        } catch (err: any) {
+            ntfStore.addNotification('error', 'Произошла ошибка при получении задачи с высоким приоритетом, попробуйте позже', 3000)
+            console.error('Ошибка при получении задачи с высоким приоритетом:', err);
+        }
+    };
 
     return{
         getIssuesStats,
         issuesStats,
         pendingIssuesStats,
+        getHPIssue
     }
 
 })

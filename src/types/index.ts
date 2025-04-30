@@ -61,3 +61,12 @@ export interface Event {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface HPIssue {
+    total: number;
+    isFirst: boolean;
+    isLast: boolean;
+    fields: any;
+    baseURL: string;
+    [key: string]: any;
+}
