@@ -2,6 +2,7 @@
 import type {HPIssue} from "@/types";
 import {getPriorityName} from "@/helpers/issuePriorityMap.ts";
 import ScrollContainer from "@/components/common/scrollContainer.vue";
+import {formatShortName} from "@/helpers/formatFullName.ts";
 
 const props = defineProps<{
   issue: HPIssue
@@ -26,9 +27,13 @@ const props = defineProps<{
           <v-icon :size="16" color="grey">mdi-chevron-double-right</v-icon>
           <span>{{issue.fields?.status?.name}}</span>
         </div>
+        <div class="__chip __tester" v-if="issue.fields?.customfield_10408">
+          <v-icon :size="16" color="warning">mdi-bug-outline</v-icon>
+          <span>{{ formatShortName(issue.fields?.customfield_10408?.displayName) }}</span>
+        </div>
         <div class="__chip __assignee" v-if="issue.fields?.assignee">
-          <v-icon :size="16" color="grey">mdi-account-hard-hat-outline</v-icon>
-          <span>{{`${issue.fields?.assignee?.displayName.split(" ")[0]} ${issue.fields?.assignee?.displayName.split(" ")[1][0]}. ${issue.fields?.assignee?.displayName.split(" ")[2][0]}.`}}</span>
+          <v-icon :size="16" color="green">mdi-account-hard-hat-outline</v-icon>
+          <span>{{ formatShortName(issue.fields?.assignee?.displayName) }}</span>
         </div>
         <div class="__chip __linked">
           <span>В Jira</span>
@@ -57,8 +62,10 @@ const props = defineProps<{
   }
   .__description{
     flex: 1 0 0;
+    padding: 5px 0;
     span{
       color: #7C7C7C;
+      font-size: 14px;
     }
   }
 

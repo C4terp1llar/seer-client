@@ -12,6 +12,7 @@ export interface User {
     email: string;
     avatar: string;
     selectedProject: string | null;
+    selectedTask: string | null;
 }
 
 export interface ProjectTitles {

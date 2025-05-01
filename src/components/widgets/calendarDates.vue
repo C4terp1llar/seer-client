@@ -60,7 +60,7 @@ const selectDate = (date: Date) => {
            v-for="(day, index) in daysInMonth"
            :key="day.toISOString()"
            :class="{
-             'past-day__wrap': isPast(day) && !isToday(day),
+             'past-day__wrap': isPast(day),
              'pd-start': isPast(day) && (index === 0 || !isPast(daysInMonth[index - 1])),
              'pd-end': isPast(day) && (index === daysInMonth.length - 1 || !isPast(daysInMonth[index + 1]))
            }"

@@ -4,6 +4,7 @@ import NoteWidget from "@/components/widgets/noteWidget.vue";
 import PersonalCalendar from "@/components/widgets/personalCalendar.vue";
 import CalendarWrap from "@/components/widgets/calendarWrap.vue";
 import HighPriorityIssuesSlider from "@/components/widgets/highPriorityIssuesSlider.vue";
+import TaskPin from "@/components/widgets/taskPin.vue";
 
 </script>
 
@@ -12,6 +13,7 @@ import HighPriorityIssuesSlider from "@/components/widgets/highPriorityIssuesSli
     <note-widget/>
     <calendar-wrap/>
     <high-priority-issues-slider/>
+    <task-pin/>
   </div>
 </template>
 
