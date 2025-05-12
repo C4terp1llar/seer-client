@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import SelectProject from "@/components/settings/selectProject.vue";
+import ChangeMode from "@/components/settings/changeMode.vue";
 </script>
 
 <template>
@@ -14,5 +15,8 @@ import SelectProject from "@/components/settings/selectProject.vue";
   height: 100%;
   width: 100%;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>

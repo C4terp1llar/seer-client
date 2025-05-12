@@ -75,8 +75,10 @@ const handleSetIssue = async (key: string) => {
 <style scoped lang="scss">
 .task-pin__wrapper{
   height: 300px;
-  min-width: 500px;
-  max-width: 600px;
+
+  min-width: 450px;
+  width: 100%;
+  flex: 1;
 
   border-radius: 10px;
   background: #282828;

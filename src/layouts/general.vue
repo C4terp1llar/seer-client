@@ -7,8 +7,14 @@ import GifLoader from "@/components/loaders/gifLoader.vue";
 import QueryModal from "@/components/queries/queryModal.vue";
 import {useRoute} from "vue-router";
 import EventEditor from "@/components/widgets/eventEditor.vue";
+import GlobalLoader from "@/components/dashboard/globalLoader.vue";
+import {useReloadStore} from "@/stores/reload.ts";
+import {useViewModeStore} from "@/stores/view.ts";
+import {vAutoAnimate} from '@formkit/auto-animate'
 
 const userStore = useUserStore();
+const reloadStore = useReloadStore();
+const viewStore = useViewModeStore();
 
 const pending = ref<boolean>(false);
 
@@ -24,8 +30,8 @@ const isEventEditorVisible = computed(() => (route.query.eventEditor || route.qu
 </script>
 
 <template>
-  <div class="wrapper">
-    <aside class="aside">
+  <div :class="viewStore.isDefaultViewMode ? 'wrapper' : 'wrapper__view-mode'" v-auto-animate>
+    <aside class="aside" v-if="viewStore.isDefaultViewMode">
       <side-bar/>
     </aside>
     <header class="header">
@@ -34,6 +40,7 @@ const isEventEditorVisible = computed(() => (route.query.eventEditor || route.qu
     <main class="main">
       <gif-loader v-if="pending"/>
       <router-view v-else-if="!pending && userStore.userData"/>
+      <global-loader v-if="reloadStore.compositePending"/>
     </main>
   </div>
 
@@ -67,6 +74,33 @@ const isEventEditorVisible = computed(() => (route.query.eventEditor || route.qu
     grid-column: span 1;
     display: flex;
     flex-direction: column;
+    position: relative;
+  }
+}
+.wrapper__view-mode{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
+  background: linear-gradient(
+          to right,
+          #480404 0%,
+          #240202 13%,
+          #000000 49%,
+          #240202 88%,
+          #480404 100%
+  );
+  .header{
+    width: fit-content;
+    margin: auto;
+  }
+  .main{
+    width: 100%;
+    height: 100%;
+    flex: 1 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
   }
 }
 </style>

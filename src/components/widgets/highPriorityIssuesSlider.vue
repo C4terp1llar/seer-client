@@ -62,7 +62,10 @@ const handleSlide = async (i: number) => {
 <style scoped lang="scss">
 .issues-slider{
   height: 300px;
-  width: 550px;
+
+  min-width: 450px;
+  width: 100%;
+  flex: 1;
 
   border-radius: 10px;
   background: #282828;

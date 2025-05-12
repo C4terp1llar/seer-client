@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import Notifications from "@/components/notifications.vue";
-import {useAppThemeStore} from "@/stores/theme.ts";
 
-const themeStore = useAppThemeStore()
+import Notifications from "@/components/notifications.vue";
 </script>
 
 <template>

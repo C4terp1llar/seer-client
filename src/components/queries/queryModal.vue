@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import QueryEditor from "@/components/queries/queryEditor.vue";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
 import {useRoute} from "vue-router";
 import {useQueriesStore} from "@/stores/queries.ts";
 import type {JqlQuery} from "@/types";
 import GifLoader from "@/components/loaders/gifLoader.vue";
 import NotFoundTemplate from "@/components/common/notFoundTemplate.vue";
+import {lockScroll, unlockScroll} from "@/helpers/modalScroll.ts";
 
 const qStore = useQueriesStore();
 const route = useRoute();
@@ -18,12 +19,15 @@ const pending = ref<boolean>(false)
 const queryItem = ref<JqlQuery | null>(null)
 
 onMounted(async () => {
+  lockScroll()
   if(queryMode.value === "view") {
     pending.value = true;
     queryItem.value = await qStore.getJqlQueryById(String(route.query.queryView))
     pending.value = false;
   }
 })
+
+onUnmounted(() => unlockScroll())
 </script>
 
 <template>

@@ -5,9 +5,15 @@ import {useMainStore} from "@/stores/main.ts";
 import {useUserStore} from "@/stores/user.ts";
 import GifLoader from "@/components/loaders/gifLoader.vue";
 import ErrorTemplate from "@/components/common/errorTemplate.vue";
-import {getPriorityName} from "@/helpers/issuePriorityMap.ts";
-import ScrollContainer from "@/components/common/scrollContainer.vue";
 import IssuesList from "@/components/issues/issuesList.vue";
+import type {IssuesShortStats} from "@/types";
+
+type IssueType = keyof IssuesShortStats;
+
+const props = defineProps<{
+  specialMode?: IssueType,
+  specialHeading?: string
+}>()
 
 const emit = defineEmits<{
   (e: 'close'): void,
@@ -40,7 +46,7 @@ const loadIssues = async (isSearch?:boolean) => {
 
   pending.value = startAt.value === 0;
 
-  const response = await store.getPaginatedIssues(userStore.userData.selectedProject, startAt.value, maxResults, q.value);
+  const response = await store.getPaginatedIssues(userStore.userData.selectedProject, startAt.value, maxResults, q.value, props.specialMode);
 
   pending.value = false;
 
@@ -80,7 +86,7 @@ const handleInput = () => {
       <button @click="emit('close')" class="close__btn">
         <v-icon :size="24">mdi-close</v-icon>
       </button>
-      <h3 class="text-center">Задачи</h3>
+      <h3 class="text-center">{{ specialHeading ?? 'Задачи' }}</h3>
       <v-text-field
           label="Ключ задачи"
           v-model.trim="q"
@@ -99,7 +105,7 @@ const handleInput = () => {
     <gif-loader v-if="pending"/>
 
     <div class="__content" v-if="!pending && issues">
-      <issues-list @choose-issue="key => emit('chooseIssue', key)" :issues="issues"/>
+      <issues-list @choose-issue="key => emit('chooseIssue', key)" :issues="issues" :special-mode="specialMode"/>
 
       <v-btn density="comfortable" class="text-none align-self-center" base-color="red" v-if="!isLast" @click="loadIssues(false)" :disabled="pending">Еще</v-btn>
       <span class="text-center" v-if="!issues.length">По вашему запросу ничего не найдено :(</span>

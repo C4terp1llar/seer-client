@@ -29,8 +29,9 @@ onMounted(async () => {
 <style scoped lang="scss">
 .note-widget__wrapper{
   height: 300px;
-  min-width: 500px;
-  max-width: 600px;
+
+  min-width: 300px;
+  width: 30%;
 
   border-radius: 10px;
   background: #282828;

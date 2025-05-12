@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import {formatShortName} from "@/helpers/formatFullName.ts";
 import {formatShortDate} from "@/helpers/dateFormat.ts";
+import type {IssuesShortStats} from "@/types";
+
+type IssueType = keyof IssuesShortStats;
 
 defineProps<{
-  issues: any
+  issues: any,
+  specialMode?: IssueType,
 }>()
 
 const emit = defineEmits<{
@@ -18,7 +22,7 @@ const emit = defineEmits<{
         v-for="issue in issues"
         :key="issue.key"
     >
-      <v-btn @click="emit('chooseIssue', issue.key)" class="choose__btn" density="compact" variant="tonal" base-color="green" icon><v-icon :size="18">mdi-check</v-icon></v-btn>
+      <v-btn @click="emit('chooseIssue', issue.key)" class="choose__btn" density="compact" variant="tonal" base-color="green" icon v-if="!specialMode"><v-icon :size="18">mdi-check</v-icon></v-btn>
 
       <div class="__heading d-flex align-items-center ga-2">
         <img class="priority-icon" :src="issue.fields?.priority?.iconUrl " alt="icon priority">

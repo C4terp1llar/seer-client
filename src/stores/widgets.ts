@@ -9,8 +9,11 @@ export const useWidgetsStore = defineStore('widgets', () => {
 
     const ntfStore = useNotificationStore()
 
+    const getNotePending = ref<boolean>(false)
+
     const getNote = async (): Promise<WidgetNote | null | void> => {
         try {
+            getNotePending.value = true;
             const response = await authAPI.get(`/note`);
 
             if (response.status === 200 && response.data.note) {
@@ -21,6 +24,8 @@ export const useWidgetsStore = defineStore('widgets', () => {
                 ntfStore.addNotification('error', 'Произошла ошибка при получении заметки, попробуйте позже', 3000);
             }
             console.error('Ошибка при получении запроса', err);
+        }finally{
+            getNotePending.value = false;
         }
     };
 
@@ -44,7 +49,8 @@ export const useWidgetsStore = defineStore('widgets', () => {
 
     return{
         getNote,
-        createNote
+        createNote,
+        getNotePending
     }
 
 })

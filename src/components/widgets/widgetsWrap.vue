@@ -10,22 +10,34 @@ import TaskPin from "@/components/widgets/taskPin.vue";
 
 <template>
   <div class="widgets__wrapper" v-auto-animate>
-    <note-widget/>
-    <calendar-wrap/>
-    <high-priority-issues-slider/>
-    <task-pin/>
+    <div class="widgets__wrapper-str">
+      <calendar-wrap/>
+      <high-priority-issues-slider/>
+    </div>
+    <div class="widgets__wrapper-str">
+      <task-pin/>
+      <note-widget/>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .widgets__wrapper {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
+
   height: 100%;
   border-radius: 15px;
   animation: fade-slide-out 0.5s ease-in-out;
 
+  .widgets__wrapper-str{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
 
 </style>

@@ -40,7 +40,7 @@ const componentsMap: Record<DashboardTab, Component> = {
 <style scoped lang="scss">
 .dashboard-page__wrapper{
   height: 100%;
-  padding: 10px;
+  padding: 5px 10px;
 
   .dashboard-page__content{
     height: 100%;

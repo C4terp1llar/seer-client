@@ -31,8 +31,11 @@ export const useMainStore = defineStore('main', () => {
         }
     };
 
+    const getHPIssuePending = ref<boolean>(false)
+
     const getHPIssue = async (project: string, index: number)  => {
         try {
+            getHPIssuePending.value = true;
             const response = await authAPI.get('/HPIssues/index', {params: {project, index}})
 
             if (response.data && response.status === 200) {
@@ -41,17 +44,20 @@ export const useMainStore = defineStore('main', () => {
         } catch (err: any) {
             ntfStore.addNotification('error', 'Произошла ошибка при получении задачи с высоким приоритетом, попробуйте позже', 3000)
             console.error('Ошибка при получении задачи с высоким приоритетом:', err);
+        }finally{
+            getHPIssuePending.value = false;
         }
     };
 
-    const getPaginatedIssues = async (project: string, startAt: number = 0, maxResults: number = 20, issueKeyFilter: string = '') => {
+    const getPaginatedIssues = async (project: string, startAt: number = 0, maxResults: number = 20, issueKeyFilter: string = '', issueSpec?: string) => {
         try {
             const response = await authAPI.get('/issues', {
                 params: {
                     project,
                     startAt,
                     maxResults,
-                    issueKey: issueKeyFilter
+                    issueKey: issueKeyFilter,
+                    issueSpec
                 }
             });
 
@@ -97,7 +103,8 @@ export const useMainStore = defineStore('main', () => {
         getHPIssue,
         getPaginatedIssues,
         setPinIssue,
-        getPinIssue
+        getPinIssue,
+        getHPIssuePending
     }
 
 })

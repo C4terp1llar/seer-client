@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import {computed, ref} from "vue";
 import { issueTypeMap } from "@/helpers/issueTypeMap";
 import type { IssuesShortStats } from "@/types";
+import ChooseTasks from "@/components/widgets/chooseTasks.vue";
+import Modal from "@/components/common/modal.vue";
 
 type IssueType = keyof IssuesShortStats;
 
@@ -13,6 +15,8 @@ interface Props {
 const props = defineProps<Props>();
 
 const issueData = computed(() => issueTypeMap[props.type]);
+
+const isModalVisible = ref(false)
 </script>
 
 <template>
@@ -22,7 +26,12 @@ const issueData = computed(() => issueTypeMap[props.type]);
     <div class="issue__img" :style="{ color: issueData.color }">
       <img :style="{ color: issueData.color }" :src="issueData.image" :alt="issueData.label">
     </div>
+    <button @click="isModalVisible = !isModalVisible" class="btn-show__tasks"></button>
   </div>
+
+  <modal @update:modelValue="args => isModalVisible = args" :model-value="isModalVisible">
+    <choose-tasks @close="isModalVisible = !isModalVisible" :special-heading="issueData.label" :special-mode="type"/>
+  </modal>
 </template>
 
 <style scoped lang="scss">
@@ -38,6 +47,11 @@ const issueData = computed(() => issueTypeMap[props.type]);
   background: #434343;
   display: flex;
   flex-direction: column;
+  transition: .3s;
+
+  &:hover{
+    filter: brightness(80%);
+  }
 
   span {
     font-weight: 500;
@@ -69,5 +83,11 @@ const issueData = computed(() => issueTypeMap[props.type]);
       object-fit: contain;
     }
   }
+
+  .btn-show__tasks{
+    position: absolute;
+    inset: 0;
+  }
+
 }
 </style>
