@@ -17,7 +17,7 @@ onMounted(async () => {
 
 <template>
   <div class="personal-calendar__wrapper">
-      <calendar-dates :schedule="calendarStore.monthsEvents" @day-select="d => selectDay(d)"/>
+      <calendar-dates :schedule="calendarStore.monthsEvents ?? []" @day-select="d => selectDay(d)"/>
       <div class="line"></div>
       <calendar-events/>
   </div>

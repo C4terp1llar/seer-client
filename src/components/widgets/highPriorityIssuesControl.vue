@@ -13,7 +13,13 @@ const emit = defineEmits<{
 }>()
 
 const handleSlide = (act: 'next' | 'prev') => {
-  emit(String(act), act === 'prev' ? props.index - 1 : props.index + 1);
+  const index = act === 'prev' ? props.index - 1 : props.index + 1;
+
+  if (act === 'prev') {
+    emit('prev', index);
+  } else {
+    emit('next', index);
+  }
 }
 
 </script>

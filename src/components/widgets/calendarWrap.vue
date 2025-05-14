@@ -16,8 +16,6 @@ onUnmounted(() => {
 
 <template>
 <div class="calendar__wrapper">
-
-
   <personal-calendar/>
 </div>
 </template>

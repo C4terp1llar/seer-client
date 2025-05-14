@@ -4,6 +4,10 @@ const priorityNameMap = {
     'критичный': 'Критичный приоритет',
     'высокий': 'Высокий приоритет',
 }
-export const getPriorityName = (n: string) => {
-    return n ? priorityNameMap[String(n.toLowerCase())] : 'Неизвестный приоритет';
-}
+
+type PriorityKey = keyof typeof priorityNameMap;
+
+export const getPriorityName = (n: string): string => {
+    const key = n.toLowerCase() as PriorityKey;
+    return key in priorityNameMap ? priorityNameMap[key] : 'Неизвестный приоритет';
+};

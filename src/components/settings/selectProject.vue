@@ -15,7 +15,10 @@ const selectedProject = ref<string | null>(uStore?.userData ? uStore.userData.se
 
 onMounted(async () => {
   pending.value = true;
-  projects.value = await stStore.getProjects();
+  const data = await stStore.getProjects();
+  if (data) {
+    projects.value = data;
+  }
   pending.value = false;
 })
 
