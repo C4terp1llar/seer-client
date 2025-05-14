@@ -1,10 +1,15 @@
 <script setup lang="ts">
+interface Props {
+  extended: boolean
+}
+
+const props = defineProps<Props>();
 
 import SkeletonLoader from "@/components/loaders/skeletonLoader.vue";
 </script>
 
 <template>
-  <div class="issues-stats-skeleton">
+  <div :class="['issues-stats-skeleton', {'__extended': extended}]">
     <div class="issues-stats-skeleton__item" v-for="i in 5" :key="i">
       <skeleton-loader class="z-10"/>
     </div>
@@ -21,6 +26,17 @@ import SkeletonLoader from "@/components/loaders/skeletonLoader.vue";
   border-radius: 15px;
   padding: 10px;
   overflow: hidden;
+
+  &.__extended{
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    .issues-stats-skeleton__item{
+      height: 33%;
+      width: 100%;
+    }
+  }
+
   .issues-stats-skeleton__item{
     border-radius: 10px;
     position: relative;
@@ -30,4 +46,5 @@ import SkeletonLoader from "@/components/loaders/skeletonLoader.vue";
     z-index: 10;
   }
 }
+
 </style>

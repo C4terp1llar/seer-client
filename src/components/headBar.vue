@@ -30,7 +30,6 @@ const pageTitle = computed(() => pageTitles[route.path] || "Страница");
       <img src="/img/short-logo.svg" alt="logo">
       <RouterLink to="/app/dashboard"/>
     </div>
-    <timer/>
     <div class="line"></div>
     <change-view-mode/>
   </div>
