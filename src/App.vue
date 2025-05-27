@@ -3,6 +3,7 @@ import Notifications from "@/components/notifications.vue";
 import {useAppThemeStore} from "@/stores/theme.ts";
 
 const themeStore = useAppThemeStore()
+// agr - v
 </script>
 
 <template>

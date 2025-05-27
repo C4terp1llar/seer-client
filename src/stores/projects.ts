@@ -17,6 +17,7 @@ export const useProjectsStore = defineStore('projects', () => {
         }
     };
 
+
     return{
         getIssues
     }
